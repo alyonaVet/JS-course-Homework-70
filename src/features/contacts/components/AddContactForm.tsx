@@ -99,7 +99,7 @@ const AddContactForm: React.FC<ContactProps> = ({onSubmit, existingContact, isSa
       </div>
       <div className="mb-2">
         <div>Photo Preview
-          {contact.image ? <img src={contact.image}></img>
+          {contact.image ? <img src={contact.image} alt="contact photo"></img>
             :
             'No photo available'}
         </div>
