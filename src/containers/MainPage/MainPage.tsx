@@ -10,9 +10,7 @@ const MainPage = () => {
         <NavLink to="/new-contact" className="btn btn-outline-success me-3 px-4">Add new contact</NavLink>
       </div>
     </header>
-      <div>
         <Contacts />
-      </div>
     </>
   );
 };
