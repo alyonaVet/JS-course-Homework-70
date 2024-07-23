@@ -7,7 +7,15 @@ export interface ContactsState {
 }
 
 const initialState: ContactsState = {
-  items: [],
+  items: [{
+    id: "1",
+    name: "abg",
+    phone: '+2938948r',
+    email: 'ajsjd@dlvjjv',
+    image: '',
+    imagePreview: '',
+
+  }],
   isCreating: false,
 };
 
@@ -17,7 +25,10 @@ export const contactsSlice = createSlice({
   reducers: {
     addContact: (state: ContactsState, action) => {
       state.items.push(action.payload);
-      state.isCreating = true;
+    },
+    updateContact: (state: ContactsState, action) => {
+      console.log(action.payload);
+      state.items = state.items.map((item) => item.id === action.payload.id ? action.payload : item)
     }
   },
   selectors: {
@@ -35,4 +46,5 @@ export const {
 
 export const {
   addContact,
+  updateContact
 } = contactsSlice.actions;
