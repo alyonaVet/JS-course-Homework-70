@@ -1,6 +1,6 @@
 import ContactItem from './ContactItem';
-import {useAppSelector} from '../../app/hooks';
-import {selectContacts} from '../../features/contacts/contactsSlice';
+import {useAppDispatch, useAppSelector} from '../../app/hooks';
+import {deleteContact, selectContacts} from '../../features/contacts/contactsSlice';
 import {useState} from 'react';
 import {ContactType} from '../../types';
 import OneContact from '../../features/contacts/components/OneContact';
@@ -11,11 +11,23 @@ const Contacts = () => {
   const [showContact, setShowContact] = useState<ContactType | null>(null);
   const contacts = useAppSelector(selectContacts);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const onEditHandler = (contact: ContactType) => {
     setShowContact(null);
     navigate(`/edit-contact/${contact.id}`);
   };
+
+  const onDeleteHandler = (contact: ContactType) => {
+    try {
+      dispatch(deleteContact(contact));
+      setShowContact(null);
+      navigate(`/`);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
 
   return (
     <>
@@ -38,7 +50,7 @@ const Contacts = () => {
             contact={showContact}
             onClose={() => setShowContact(null)}
             onEdit={() => onEditHandler(showContact)}
-            onDelete={() => null}
+            onDelete={() => onDeleteHandler(showContact)}
           />
         )
       }
