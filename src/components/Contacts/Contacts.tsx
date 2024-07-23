@@ -9,22 +9,32 @@ import {useNavigate} from 'react-router-dom';
 
 const Contacts = () => {
   const [showContact, setShowContact] = useState<ContactType | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+
   const contacts = useAppSelector(selectContacts);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const onEditHandler = (contact: ContactType) => {
-    setShowContact(null);
-    navigate(`/edit-contact/${contact.id}`);
+    try {
+      setShowContact(null);
+      navigate(`/edit-contact/${contact.id}`);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const onDeleteHandler = (contact: ContactType) => {
     try {
+      setIsDeleting(true);
       dispatch(deleteContact(contact));
       setShowContact(null);
       navigate(`/`);
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -51,6 +61,7 @@ const Contacts = () => {
             onClose={() => setShowContact(null)}
             onEdit={() => onEditHandler(showContact)}
             onDelete={() => onDeleteHandler(showContact)}
+            isDeleting={isDeleting}
           />
         )
       }
