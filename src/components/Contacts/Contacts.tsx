@@ -4,11 +4,18 @@ import {selectContacts} from '../../features/contacts/contactsSlice';
 import {useState} from 'react';
 import {ContactType} from '../../types';
 import OneContact from '../../features/contacts/components/OneContact';
+import {useNavigate} from 'react-router-dom';
 
 
 const Contacts = () => {
   const [showContact, setShowContact] = useState<ContactType | null>(null);
   const contacts = useAppSelector(selectContacts);
+  const navigate = useNavigate();
+
+  const onEditHandler = (contact: ContactType) => {
+    setShowContact(null);
+    navigate(`/edit-contact/${contact.id}`);
+  };
 
   return (
     <>
@@ -30,7 +37,7 @@ const Contacts = () => {
           <OneContact
             contact={showContact}
             onClose={() => setShowContact(null)}
-            onEdit={() => null}
+            onEdit={() => onEditHandler(showContact)}
             onDelete={() => null}
           />
         )
