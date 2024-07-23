@@ -27,9 +27,11 @@ export const contactsSlice = createSlice({
       state.items.push(action.payload);
     },
     updateContact: (state: ContactsState, action) => {
-      console.log(action.payload);
       state.items = state.items.map((item) => item.id === action.payload.id ? action.payload : item)
-    }
+    },
+    deleteContact: (state: ContactsState, action) => {
+      state.items = state.items.filter((item) => item.id !== action.payload.id)
+    },
   },
   selectors: {
     selectContacts: (state) => state.items,
@@ -46,5 +48,6 @@ export const {
 
 export const {
   addContact,
-  updateContact
+  updateContact,
+  deleteContact,
 } = contactsSlice.actions;
