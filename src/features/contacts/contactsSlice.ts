@@ -3,20 +3,10 @@ import {createSlice} from '@reduxjs/toolkit';
 
 export interface ContactsState {
   items: ContactType[];
-  isCreating: boolean;
 }
 
 const initialState: ContactsState = {
-  items: [{
-    id: "1",
-    name: "abg",
-    phone: '+2938948r',
-    email: 'ajsjd@dlvjjv',
-    image: '',
-    imagePreview: '',
-
-  }],
-  isCreating: false,
+  items: [],
 };
 
 export const contactsSlice = createSlice({
@@ -35,7 +25,6 @@ export const contactsSlice = createSlice({
   },
   selectors: {
     selectContacts: (state) => state.items,
-    selectCreateContactLoading: (state) => state.isCreating,
   }
 });
 
@@ -43,7 +32,6 @@ export const contactsReducer = contactsSlice.reducer;
 
 export const {
   selectContacts,
-  selectCreateContactLoading
 } = contactsSlice.selectors;
 
 export const {
