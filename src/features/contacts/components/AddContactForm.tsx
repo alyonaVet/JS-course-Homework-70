@@ -1,12 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {ContactFormType, ContactType} from '../../../types';
-import ButtonSpinner from '../../../components/ButtonSpinner/ButtonSpinner';
 import {NavLink} from 'react-router-dom';
 
 interface ContactProps {
   onSubmit: (contact: ContactType) => void;
   existingContact?: ContactType;
-  isSaving?: boolean;
 }
 
 const emptyState: ContactFormType = {
@@ -18,7 +16,7 @@ const emptyState: ContactFormType = {
 };
 
 
-const AddContactForm: React.FC<ContactProps> = ({onSubmit, existingContact, isSaving = false}) => {
+const AddContactForm: React.FC<ContactProps> = ({onSubmit, existingContact}) => {
 
   const [contact, setContact] = useState<ContactFormType>(emptyState);
   useEffect(() => {
@@ -107,9 +105,7 @@ const AddContactForm: React.FC<ContactProps> = ({onSubmit, existingContact, isSa
       <button
         type="submit"
         className="btn btn-primary mt-2"
-        disabled={isSaving}
       >
-        {isSaving && <ButtonSpinner/>}
         {existingContact ? 'Update' : 'Save'}
       </button>
       <NavLink to="/" type="button" className="btn btn-info mt-2 ms-4">Back to contacts</NavLink>
