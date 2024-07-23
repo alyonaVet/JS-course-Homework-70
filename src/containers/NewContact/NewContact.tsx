@@ -1,11 +1,10 @@
 import AddContactForm from '../../features/contacts/components/AddContactForm';
-import {useAppDispatch, useAppSelector} from '../../app/hooks';
-import {addContact,  selectCreateContactLoading} from '../../features/contacts/contactsSlice';
+import {useAppDispatch} from '../../app/hooks';
+import {addContact} from '../../features/contacts/contactsSlice';
 import {ContactFormType} from '../../types';
 
 const NewContact = () => {
   const dispatch = useAppDispatch();
-  const isCreating = useAppSelector(selectCreateContactLoading);
 
   const onSubmit = async (contact: ContactFormType) => {
     try {
@@ -17,7 +16,7 @@ const NewContact = () => {
 
   return (
     <div className="container mt-5">
-      <AddContactForm onSubmit={onSubmit} isSaving={isCreating} />
+      <AddContactForm onSubmit={onSubmit} />
     </div>
   );
 };
