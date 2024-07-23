@@ -1,9 +1,17 @@
 export interface ContactType {
-  id: number;
+  id: string;
   name: string;
   phone: string;
   email: string;
   image?: string;
   imagePreview?: string;
 }
-export type ContactFormType = Omit<ContactType, 'id'>;
+
+export interface ContactFormType {
+  id?: string;
+  name: string;
+  phone: string;
+  email: string;
+  image?: string;
+  imagePreview?: string;
+}

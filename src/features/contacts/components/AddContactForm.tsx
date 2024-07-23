@@ -41,7 +41,7 @@ const AddContactForm: React.FC<ContactProps> = ({onSubmit, existingContact, isSa
 
     onSubmit({
       ...contact,
-      id: Math.random(),
+      id: contact?.id ? contact.id : Math.random().toString(),
     });
 
     setContact(emptyState);
@@ -98,10 +98,10 @@ const AddContactForm: React.FC<ContactProps> = ({onSubmit, existingContact, isSa
         />
       </div>
       <div className="mb-2">
-        <div>Photo Preview
-          {contact.image ? <img src={contact.image} alt="contact photo"></img>
+        <div className="d-flex align-items-center gap-3">Photo Preview:
+          {contact.image ? <img src={contact.image} alt="contact photo" style={{width: '150px', height: 'auto'}}></img>
             :
-            'No photo available'}
+            ' No photo available'}
         </div>
       </div>
       <button
